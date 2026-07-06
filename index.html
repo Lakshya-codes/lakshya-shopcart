@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartCart — Shop Smarter</title>
+<link rel="stylesheet" href="ecom.css">
+<body>
+
+<div class="promo-banner">
+  🚀 Free shipping on orders over ₹999 &nbsp;<span>· Use code <strong>Lakshya10</strong> for 10% off</span>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 13L5 8L8 11L11 6L13 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="13" cy="4" r="2" fill="white"/>
+        </svg>
+      </div>
+      SmartCart
+    </a>
+
+    <div class="search-bar">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search products…" oninput="filterProducts()">
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn" title="Wishlist" onclick="showToast('Wishlist coming soon!', '')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+      <button class="nav-btn" id="cartBtn" title="Cart" onclick="toggleCart()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="badge hidden" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- CART OVERLAY & SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>Your cart</h2>
+    <button class="close-btn" onclick="toggleCart()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <p>Your cart is empty.<br>Add some items to get started!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-summary-row"><span>Subtotal</span><span id="subtotalAmt">$0.00</span></div>
+    <div class="cart-summary-row"><span>Shipping</span><span id="shippingAmt">$4.99</span></div>
+    <div class="cart-summary-row"><span>Tax (8%)</span><span id="taxAmt">$0.00</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="totalAmt">$0.00</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout →</button>
+  </div>
+</aside>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Shop <span>everything,</span><br>smarter.</h1>
+  <p>Curated picks · Fast delivery · Hassle-free returns</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">Browse products</button>
+    <button class="btn-outline-white" onclick="showToast('Deals page coming soon!','')">Today's deals</button>
+  </div>
+</section>
+
+<!-- FEATURES BAR -->
+<div class="features-bar">
+  <div class="features-inner">
+    <div class="feature-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Free shipping ₹999+
+    </div>
+    <div class="feature-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      30-day returns
+    </div>
+    <div class="feature-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Secure checkout
+    </div>
+    <div class="feature-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l.46-.46a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+      24/7 support
+    </div>
+  </div>
+</div>
+
+<!-- MAIN SECTION -->
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">All products</h2>
+    <span class="see-all" id="resultCount"></span>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="categories" style="margin-bottom: 24px;">
+    <button class="cat-chip active" onclick="setCategory('all', this)">All</button>
+    <button class="cat-chip" onclick="setCategory('Electronics', this)">Electronics</button>
+    <button class="cat-chip" onclick="setCategory('Accessories', this)">Accessories</button>
+    <button class="cat-chip" onclick="setCategory('Home', this)">Home</button>
+    <button class="cat-chip" onclick="setCategory('Fitness', this)">Fitness</button>
+    <button class="cat-chip" onclick="setCategory('Fashion', this)">Fashion</button>
+    <button class="cat-chip" onclick="setCategory('Books', this)">Books</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>SmartCart</strong> &nbsp;·&nbsp; © 2026 All rights reserved &nbsp;·&nbsp;
+  <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none;">Privacy</a> &nbsp;·&nbsp;
+  <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none;">Terms</a>
+</footer>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+<script src="ecom.js"></script>
+</body>
+</head>
+</html>
