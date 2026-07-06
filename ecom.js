@@ -190,14 +190,14 @@ function updateCartUI() {
   `).join('');
 
   const subtotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
-  const shipping = subtotal >= 49 ? 0 : 4.99;
+  const shipping = subtotal >= 999 ? 0 : 99;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
-  document.getElementById('subtotalAmt').textContent = '$' + subtotal.toFixed(2);
-  document.getElementById('shippingAmt').textContent = shipping === 0 ? 'Free' : '$' + shipping.toFixed(2);
-  document.getElementById('taxAmt').textContent = '$' + tax.toFixed(2);
-  document.getElementById('totalAmt').textContent = '$' + total.toFixed(2);
+  document.getElementById('subtotalAmt').textContent = '₹' + subtotal.toFixed(2);
+  document.getElementById('shippingAmt').textContent = shipping === 0 ? 'Free' : '₹' + shipping.toFixed(2);
+  document.getElementById('taxAmt').textContent = '₹' + tax.toFixed(2);
+  document.getElementById('totalAmt').textContent = '₹' + total.toFixed(2);
   footer.style.display = 'block';
 }
 
